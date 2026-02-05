@@ -1,0 +1,6 @@
+<h1>User Show Page</h1>
+<% @user.events.each do |e| %>
+  <p><%= e.title %></p>
+  <p><%= e.date %></p>
+  <p><%= e.location %></p>
+<% end %>
