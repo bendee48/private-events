@@ -12,5 +12,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "events#index"
   devise_for :users # creates the routes for sign_up, log_out etc
-  resources :users, only: [ :show ] # standard routes for the app realted user pages
+  resources :users, only: [ :show ] # standard routes for the app related user pages
+  resources :events, only: [ :create, :new, :show ]
 end
