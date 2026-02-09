@@ -1,6 +1,26 @@
 <h1>User Show Page</h1>
-<% @user.events.each do |e| %>
+<h3>Created Events</h3>
+<% @user.created_events.each do |e| %>
   <p><%= e.title %></p>
   <p><%= e.date %></p>
   <p><%= e.location %></p>
+<% end %>
+<%= Time.now %>
+<h3>Attending Events</h3>
+<h3>Past</h3>
+<% @user.attending_events.each do |e| %>
+  <% if e.date  < Time.now %>
+    <p><%= e.title %></p>
+    <p><%= e.date %></p>
+    <p><%= e.location %></p>
+  <% end %>
+<% end %>
+
+<h3>Upcoming</h3>
+<% @user.attending_events.each do |e| %>
+  <% if e.date >= Time.now %>
+    <p><%= e.title %></p>
+    <p><%= e.date %></p>
+    <p><%= e.location %></p>
+  <% end %>
 <% end %>

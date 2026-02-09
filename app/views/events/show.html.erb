@@ -2,3 +2,8 @@
 <h3><%= @event.title %></h3>
 <h3><%= @event.date %></h3>
 <h3><%= @event.location %></h3>
+<%= button_to "Attend", event_attendances_path(@event) %>
+<h3>Attendees:</h3>
+<% @event.attendees.each do |a| %>
+  <p><%= a.email %></p>
+<% end %>

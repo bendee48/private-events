@@ -7,3 +7,14 @@
 <br/ >
 <br/ >
 <%= link_to "Create Event", new_event_path %>
+<br/>
+<br/>
+<% @events.each do |event| %>
+  <div>
+    <%= link_to event.title, event %>
+    <p><%= event.date %></p>
+    <p><%= event.location %></p>
+    <p><%= event.creator.email %></p>
+    <%= button_to "Attend", event_attendances_path(event), method: :post %>
+  </div>
+<% end %>

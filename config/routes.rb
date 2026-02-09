@@ -13,5 +13,7 @@ Rails.application.routes.draw do
   root "events#index"
   devise_for :users # creates the routes for sign_up, log_out etc
   resources :users, only: [ :show ] # standard routes for the app related user pages
-  resources :events, only: [ :create, :new, :show ]
+  resources :events, only: [ :create, :new, :show ] do
+    resources :attendances, only: [ :create ]
+  end
 end
