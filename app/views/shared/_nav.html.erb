@@ -1,6 +1,6 @@
 <%= tag.nav do %>
   <% if current_user %>
-    <%= tag.span "Hello #{current_user.email}"%>
+    <%= tag.span "Hello #{current_user.username}"%>
   <% else %>
     <%=  tag.span "No user logged in" %>
   <% end %>
