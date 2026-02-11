@@ -24,10 +24,7 @@
   </head>
 
   <body>
-    <% if current_user %>
-      <%= current_user.email %>
-    <% end %>
-    <%= link_to 'Home', root_path %>
+    <%= render "shared/nav" %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
