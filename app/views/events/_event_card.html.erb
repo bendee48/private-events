@@ -1,0 +1,14 @@
+<%= tag.div class: "card" do %>
+  <%= tag.div class: "card-header" do %>
+    <%= link_to event_path(event.id) do %>
+      <%= tag.h3 event.title %>
+    <% end %>
+  <% end %>
+  <%= tag.div class: "card-body" do %>
+    <%= tag.p event.date %>
+    <%= tag.p event.location %>
+  <% end %>
+  <%= tag.div class: "card-footer" do %>
+    <%= button_to "Attend", event_attendances_path(event), class: "btn" %>
+  <% end %>
+<% end %>

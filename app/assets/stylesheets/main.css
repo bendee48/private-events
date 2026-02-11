@@ -1,0 +1,25 @@
+/* Main Styling */
+
+.btn {
+  display: inline-block;
+  padding: .5em 2em;
+  border: 1px solid #fff;
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+/* Event Card */
+
+.card {
+  display: inline-flex;
+  flex-direction: column;
+  box-shadow: darkgray 3px 3px 10px;
+  margin-bottom: 4em;
+  background-color: #fff;
+  border-radius: 1em;
+  padding: 1em;
+}
+
+.card_body {}
+
+.card_footer {}
