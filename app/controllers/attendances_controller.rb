@@ -1,4 +1,5 @@
 class AttendancesController < ApplicationController
+  before_action :authenticate_user!, only: [ :create ]
   def create
     user = current_user
     event = Event.find(params[:event_id])
