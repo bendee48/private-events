@@ -3,5 +3,5 @@
 <%= render partial: "event_card", locals: { event: @event } %>
 <%= tag.h3 "Attendees" %>
 <% @event.attendees.each do |a| %>
-  <%= tag.p a.email %>
+  <%= tag.p a.username %>
 <% end %>

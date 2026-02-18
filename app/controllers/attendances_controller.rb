@@ -8,7 +8,7 @@ class AttendancesController < ApplicationController
     if attendance.save
       redirect_back fallback_location: event_path(event), notice: "You're attending!"
     else
-      redirect_back fallback_location: event_path(event), alert: attendance.full_messages.to_sentence
+      redirect_back fallback_location: event_path(event), alert: attendance.errors.full_messages.to_sentence
     end
   end
 end
