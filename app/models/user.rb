@@ -9,4 +9,8 @@ class User < ApplicationRecord
   has_many :attending_events, through: :attendances, source: :event
 
   validates :username, presence: true, uniqueness: true
+
+  def attending?(event)
+    attendances.exists?(event_id: event.id)
+  end
 end
