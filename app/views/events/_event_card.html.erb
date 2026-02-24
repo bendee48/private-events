@@ -5,7 +5,7 @@
     <% end %>
   <% end %>
   <%= tag.div class: "card-body" do %>
-    <%= tag.p event.date %>
+    <%= tag.p event.date.strftime("%d %B, %Y") %>
     <%= tag.p "Where: " + event.location %>
     <%= tag.p "Creator: " + event.creator.username %>
   <% end %>
