@@ -2,5 +2,11 @@ class Attendance < ApplicationRecord
   belongs_to :user
   belongs_to :event
 
-  validates :user_id, uniqueness: { scope: :event_id, message: "is already attending this event." }
+  validate :user_already_attending?
+
+  def user_already_attending?
+    if Attendance.exists?(user_id: user_id, event_id: event_id)
+      errors.add(:base, "You're already attending this event!")
+    end
+  end
 end
