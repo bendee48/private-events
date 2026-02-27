@@ -1,7 +1,8 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, only: [ :new, :create ]
   def index
-    @events = Event.all
+    @upcoming_events = Event.upcoming
+    @past_events = Event.past
   end
 
   def new
@@ -13,7 +14,8 @@ class EventsController < ApplicationController
     @event = @user.created_events.build(event_params)
 
     if @event.save
-      @event.attendances.create!(user_id: @user.id)
+      # add the creator as the first guest
+      @event.attendances.create!(user_id: @user.id, event_id: @event.id)
       redirect_to @event
     else
       render :new, status: :unprocessable_entity

@@ -10,7 +10,7 @@
     <%= tag.p "Creator: " + event.creator.username %>
   <% end %>
   <%= tag.div class: "card-footer" do %>
-    <% if current_user.attending?(event) %>
+    <% if current_user && current_user.attending?(event) %>
       <%= button_to "You're going!", root_path, disabled: true, class: "btn" %>
     <% else %>
       <%= button_to "Attend", event_attendances_path(event), class: "btn" %>

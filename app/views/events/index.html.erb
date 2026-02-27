@@ -3,9 +3,15 @@
 <br/ >
 <br/ >
 <br/ >
-<%= link_to "Create Event", new_event_path %>
+<%= button_to "Create Event", new_event_path, method: :get, class: "btn" %>
 <br/>
 <br/>
-<% @events.each do |event| %>
+<h2>Upcoming Events</h2>
+<% @upcoming_events.each do |event| %>
+  <%= render partial: "event_card", locals: { event: event } %>
+<% end %>
+
+<h2>Past Events</h2>
+<% @past_events.each do |event| %>
   <%= render partial: "event_card", locals: { event: event } %>
 <% end %>
