@@ -15,7 +15,7 @@ class EventsController < ApplicationController
 
     if @event.save
       # add the creator as the first guest
-      @event.attendances.create!(user_id: @user.id, event_id: @event.id)
+      @event.attendances.create!(user_id: @user.id)
       redirect_to @event
     else
       render :new, status: :unprocessable_entity
@@ -24,6 +24,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @users = User.all
   end
 
   private

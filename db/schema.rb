@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_18_170346) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_27_193447) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "attendances", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.bigint "event_id", null: false
+    t.string "status", default: "not going", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["event_id", "user_id"], name: "index_attendances_on_event_id_and_user_id", unique: true

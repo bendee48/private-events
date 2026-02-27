@@ -11,9 +11,9 @@
   <% end %>
   <%= tag.div class: "card-footer" do %>
     <% if current_user && current_user.attending?(event) %>
-      <%= button_to "You're going!", root_path, disabled: true, class: "btn" %>
+      <%#= button_to "You're going!", root_path, disabled: true, class: "btn" %>
     <% else %>
-      <%= button_to "Attend", event_attendances_path(event), class: "btn" %>
+      <%#= button_to "Attend", event_attendances_path(event), class: "btn" %>
     <% end %>
   <% end %>
 <% end %>
