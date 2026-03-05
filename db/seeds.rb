@@ -30,9 +30,9 @@ Event.create!(title: "Rave", location: 'Manchester', date: Time.new(2026, 5, 1),
 Attendance.create(user_id: 3, event_id: 5)
 
 # Attendances
-Attendance.create!(user_id: 1, event_id: 3)
-Attendance.create!(user_id: 2, event_id: 1)
-Attendance.create!(user_id: 2, event_id: 5)
-Attendance.create!(user_id: 3, event_id: 1)
+Attendance.create!(user_id: 1, event_id: 3, status: "going")
+Attendance.create!(user_id: 2, event_id: 1, status: "invited")
+Attendance.create!(user_id: 2, event_id: 5, status: "going")
+Attendance.create!(user_id: 3, event_id: 1, status: "invited")
 
 puts "Created 3 users, 5 events and 6 attendances"
