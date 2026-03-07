@@ -38,5 +38,6 @@ Attendance.create!(user_id: 2, event_id: 5, status: "going")
 Attendance.create!(user_id: 3, event_id: 1, status: "invited")
 Attendance.create!(user_id: 1, event_id: 6, status: "invited")
 Attendance.create!(user_id: 2, event_id: 6, status: "invited")
+Attendance.create!(user_id: 3, event_id: 4, status: "not going")
 
 puts "Created 3 users, 5 events and 6 attendances"

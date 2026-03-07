@@ -2,23 +2,26 @@
 
 <%= render partial: "shared/event_card", locals: { event: @event } %>
 
-
-<%= tag.h3 "Users" %>
-<% @users.each do |user| %>
-  <%= tag.ul do %>
-    <%= tag.li user.username %>
-    <% if user.invited?(@event) %>
-      <%= tag.li 'Invited' %>
-    <% elsif user.attending?(@event) %>
-      <%= tag.li 'Attending' %>
-    <% end %>
-    <% if @event.creator.username == current_user.username && !user.attendance_created?(@event) %>
-      <%= button_to "Invite", event_attendances_path(@event), params: { user_id: user.id } %>
+<% if @event.created_by?(current_user) %>
+  <%= tag.h3 "Invite" %>
+  <% @users.each do |user| %>
+    <%= tag.ul do %>
+      <%= tag.li user.username %>
+      <% if user.invited?(@event) %>
+        <%= tag.li 'Invited' %>
+      <% elsif user.attending?(@event) %>
+        <%= tag.li 'Attending' %>
+      <% elsif user.declined?(@event) %>
+        <%= tag.li 'Declined' %>
+      <% end %>
+      <% if !user.attendance_created?(@event) %>
+        <%= button_to "Invite", event_attendances_path(@event), params: { user_id: user.id } %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>
 
-<%= tag.h3 "Going" %>
-<% @guests.each do |a| %>
+<%= tag.h3 "Attendees" %>
+<% @attendees.each do |a| %>
   <%= tag.p a.username %>
 <% end %>
