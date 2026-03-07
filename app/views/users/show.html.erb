@@ -19,3 +19,12 @@
     <%= render partial: "shared/event_card", locals: { event: e } %>
   <% end %>
 <% end %>
+
+<h3>Invites</h3>
+<% @invited_attendances.each do |attendance| %>
+  <% event = attendance.event %>
+  <%= tag.p "New Invite" %>
+  <%= link_to event.title, event_path(event.id) %>
+  <%= button_to "Accept", event_attendance_path(event.id, attendance.id), method: :patch, params: { attendance: { status: "going" } } %>
+  <%= button_to "Reject" %>
+<% end %>

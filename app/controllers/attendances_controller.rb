@@ -11,4 +11,14 @@ class AttendancesController < ApplicationController
       redirect_back fallback_location: event_path(event), alert: attendance.errors.full_messages.to_sentence
     end
   end
+
+  def update
+    attendance = Attendance.find(params[:id])
+
+    if attendance.update(status: params[:attendance][:status])
+      redirect_back fallback_location: user_path(current_user), notice: "Invite accepted!"
+    else
+      redirect_back fallback_location: user_path(current_user), alert: attendance.errors.full_messages.to_sentence
+    end
+  end
 end
