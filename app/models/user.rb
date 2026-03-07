@@ -10,16 +10,20 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
 
-  # TODO: get rid of maybe? with the changing funcitonality
-  # def attending?(event)
-  #   attendances.exists?(event_id: event.id)
-  # end
-
   def invited?(event)
     attendances.exists?(event_id: event.id, status: "invited")
   end
 
   def attending?(event)
     attendances.exists?(event_id: event.id, status: "going")
+  end
+
+  def declined?(event)
+    attendances.exists?(event_id: event.id, status: "not going")
+  end
+
+  # checks to see if an attendance instance has been created
+  def attendance_created?(event)
+    attendances.exists?(event_id: event.id)
   end
 end

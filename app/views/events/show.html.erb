@@ -2,6 +2,7 @@
 
 <%= render partial: "event_card", locals: { event: @event } %>
 
+
 <%= tag.h3 "Users" %>
 <% @users.each do |user| %>
   <%= tag.ul do %>
@@ -11,7 +12,7 @@
     <% elsif user.attending?(@event) %>
       <%= tag.li 'Attending' %>
     <% end %>
-    <% if @event.creator.username == current_user.username && !user.invited?(@event) %>
+    <% if @event.creator.username == current_user.username && !user.attendance_created?(@event) %>
       <%= button_to "Invite", event_attendances_path(@event), params: { user_id: user.id } %>
     <% end %>
   <% end %>

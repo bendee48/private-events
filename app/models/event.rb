@@ -8,7 +8,6 @@ class Event < ApplicationRecord
   scope :upcoming, -> { where("date >= ?", Time.now) }
   scope :past,     -> { where("date < ?", Time.now) }
 
-  # wrong
   def guests
     User.joins(:attendances).where(attendances: { status: "going", event_id: id })
   end
