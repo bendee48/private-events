@@ -8,10 +8,10 @@
 <br/>
 <h2>Upcoming Events</h2>
 <% @upcoming_events.each do |event| %>
-  <%= render partial: "event_card", locals: { event: event } %>
+  <%= render partial: "shared/event_card", locals: { event: event } %>
 <% end %>
 
 <h2>Past Events</h2>
 <% @past_events.each do |event| %>
-  <%= render partial: "event_card", locals: { event: event } %>
+  <%= render partial: "shared/event_card", locals: { event: event } %>
 <% end %>

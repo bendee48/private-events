@@ -6,7 +6,8 @@ class User < ApplicationRecord
 
   has_many :created_events, class_name: "Event"
   has_many :attendances
-  has_many :attending_events, through: :attendances, source: :event
+  has_many :going_attendances, -> { where(status: "going") }, class_name: "Attendance"
+  has_many :attending_events, through: :going_attendances, source: :event
 
   validates :username, presence: true, uniqueness: true
 

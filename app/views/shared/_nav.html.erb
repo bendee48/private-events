@@ -1,6 +1,6 @@
 <%= tag.nav do %>
   <% if current_user %>
-    <%= tag.span "Hello #{current_user.username}"%>
+     <%= link_to "Hello #{current_user.username}", user_path(current_user) %>
   <% else %>
     <%=  tag.span "No user logged in" %>
   <% end %>
