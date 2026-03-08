@@ -20,10 +20,10 @@
   <% end %>
 <% end %>
 
-<h3>Invites</h3>
+<h3 id="invites">Invites</h3>
 <% @invited_attendances.each do |attendance| %>
   <% event = attendance.event %>
-  <%= tag.p "New Invite" %>
+  <%= tag.p "New Invite from #{event.creator.username}" %>
   <%= link_to event.title, event_path(event.id) %>
   <%= button_to "Accept", event_attendance_path(event.id, attendance.id), method: :patch, params: { attendance: { status: "going" } } %>
   <%= button_to "Reject", event_attendance_path(event.id, attendance.id), method: :patch, params: { attendance: { status: "not going"} } %>

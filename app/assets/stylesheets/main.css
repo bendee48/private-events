@@ -14,12 +14,17 @@
   display: inline-flex;
   flex-direction: column;
   box-shadow: darkgray 3px 3px 10px;
-  margin-bottom: 4em;
   background-color: #fff;
   border-radius: 1em;
   padding: 1em;
 }
 
+.card > * {
+  flex: 0 1 auto;
+}
+
 .card_body {}
 
-.card_footer {}
+.card_footer {
+
+}
