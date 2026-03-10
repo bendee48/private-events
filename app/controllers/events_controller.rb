@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: [ :new, :create, :show ]
+  before_action :authenticate_user!, except: [ :index ]
+  before_action :set_event, only: [ :new, :create, :show, :edit, :update ]
+  before_action :authorize_creator!, only: [ :edit, :update ]
   def index
     @upcoming_events = Event.upcoming
     @past_events = Event.past
@@ -10,8 +12,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    @user = User.find(current_user.id)
-    @event = @user.created_events.build(event_params)
+    @event = current_user.created_events.build(event_params)
 
     if @event.save
       # add the creator as the first guest
@@ -28,9 +29,32 @@ class EventsController < ApplicationController
     @users = User.all
   end
 
+  def edit
+    @event = Event.find(params[:id])
+  end
+
+  def update
+    @event = Event.find(params[:id])
+
+    if @event.update(event_params)
+      redirect_to @event, notice: "Event updated!"
+    else
+      flash.now[:alert] = "Unable to update event. Please fix the errors below."
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def event_params
     params.expect(event: [ :title, :date, :location ])
+  end
+
+  def set_event
+    @event = Event.find(params[:id])
+  end
+
+  def authorize_creator!
+    redirect_to events_path, alert: "Not authorized for that action" unless @event.created_by?(current_user)
   end
 end

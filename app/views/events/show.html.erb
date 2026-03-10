@@ -1,16 +1,10 @@
 <h1>Event Show Page</h1>
 
-<%= render partial: "shared/event_card", locals: { event: @event } %>
-
-<% if current_user.invited?(@event) %>
-  <%= link_to user_path(current_user) + "#invites" do %>
-    <%= tag.li 'You\'ve been invited.' %>
-  <% end %>
-<% elsif current_user.attending?(@event) %>
-  <%= tag.li "You're going to this event." %>
-<% elsif current_user.declined?(@event) %>
-  <%= tag.li "You can't make this event." %>
+<% if @event.created_by?(current_user) %>
+  <%= link_to "Edit", edit_event_path(@event.id), class: "btn" %>
 <% end %>
+
+<%= render partial: "shared/event_card", locals: { event: @event } %>
 
 <% if @event.created_by?(current_user) %>
   <%= tag.h3 "Invite" %>
