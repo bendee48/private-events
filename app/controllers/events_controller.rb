@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, except: [ :index ]
-  before_action :set_event, only: [ :new, :create, :show, :edit, :update ]
+  before_action :set_event, only: [ :show, :edit, :update ]
   before_action :authorize_creator!, only: [ :edit, :update ]
   def index
     @upcoming_events = Event.upcoming
@@ -16,7 +16,7 @@ class EventsController < ApplicationController
 
     if @event.save
       # add the creator as the first guest
-      @event.attendances.create!(user_id: @user.id, status: "going")
+      @event.attendances.create!(user_id: current_user.id, status: "going")
       redirect_to @event
     else
       render :new, status: :unprocessable_entity
@@ -24,18 +24,14 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:id])
     @attendees = @event.attendees
     @users = User.all
   end
 
   def edit
-    @event = Event.find(params[:id])
   end
 
   def update
-    @event = Event.find(params[:id])
-
     if @event.update(event_params)
       redirect_to @event, notice: "Event updated!"
     else
