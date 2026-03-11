@@ -1,11 +1,16 @@
-<%= tag.nav do %>
-  <% if current_user %>
-     <%= link_to "Hello #{current_user.username}", user_path(current_user) %>
-  <% else %>
-    <%=  tag.span "No user logged in" %>
+<%= tag.nav(class: "nav") do %>
+  <%= tag.div(class: "nav-left") do %>
+    <% if current_user %>
+      <%= tag.h3 "Hello #{current_user.username}" %>
+      <%= link_to 'Profile', user_path(current_user) %>
+    <% else %>
+      <%=  tag.span "No user logged in" %>
+    <% end %>
+    <%= link_to 'Home', root_path %>
   <% end %>
-  <%= link_to 'Home', root_path %>
-  <%= link_to 'Sign Up', new_user_registration_path %>
-  <%= link_to 'Sign In', new_user_session_path %>
-  <%= link_to 'Log Out', destroy_user_session_path, data: { turbo_method: :delete } %>
+  <%= tag.div(class: "nav-right") do %>
+    <%= link_to 'Sign Up', new_user_registration_path %>
+    <%= link_to 'Sign In', new_user_session_path %>
+    <%= link_to 'Log Out', destroy_user_session_path, data: { turbo_method: :delete } %>
+  <% end %>
 <% end %>

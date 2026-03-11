@@ -1,4 +1,31 @@
+/* Defaults */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Inherit text color from parent */
+}
+
+body {
+  font-family: sans-serif;
+}
+
+a:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+
 /* Main Styling */
+
+.container {
+  max-width: 1200px;
+  width: 90%;
+  margin: 0 auto;
+}
 
 .btn {
   display: inline-block;
@@ -8,23 +35,68 @@
   cursor: pointer;
 }
 
+/* Navbar */
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 0;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.nav a {
+  text-decoration: none;
+  font-family: sans-serif;
+  padding: 0.5em;
+}
+
+.nav a:hover {
+  color: #fff;
+  background: #c1c1c1;
+  border-radius: 5px;
+}
+
+/* Event Index Page */
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1em;
+}
+
 /* Event Card */
 
 .card {
   display: inline-flex;
   flex-direction: column;
+  align-items: center;
   box-shadow: darkgray 3px 3px 10px;
   background-color: #fff;
   border-radius: 1em;
   padding: 1em;
+  gap: 1em;
 }
 
-.card > * {
-  flex: 0 1 auto;
+.card-body {
+  text-align: center;
 }
 
-.card_body {}
+.card-footer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.2em;
+}
 
-.card_footer {
-
+.visibility-tag {
+  background-color: rgba(0, 186, 228, 0.5);
+  padding: 0.1em 0.3em;
+  border-radius: 5px;
 }

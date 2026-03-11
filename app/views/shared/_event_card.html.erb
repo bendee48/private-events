@@ -6,11 +6,11 @@
   <% end %>
   <%= tag.div class: "card-body" do %>
     <%= tag.p event.date.strftime("%d %B, %Y") %>
-    <%= tag.p "Where: " + event.location %>
-    <%= tag.p "Creator: " + event.creator.username %>
+    <%= tag.p event.location %>
+    <%= tag.p "Hosted by " + event.creator.username %>
   <% end %>
   <%= tag.div class: "card-footer" do %>
-    <%= tag.span event.private_event? ? "Private" : "Public" %>
+    <%= tag.span event.private_event? ? "Private" : "Public", class: "visibility-tag" %>
     <% if current_user %>
       <% if current_user.invited?(event) %>
         <%= link_to user_path(current_user) + "#invites" do %>
