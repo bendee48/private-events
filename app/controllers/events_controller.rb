@@ -2,6 +2,7 @@ class EventsController < ApplicationController
   before_action :authenticate_user!, except: [ :index ]
   before_action :set_event, only: [ :show, :edit, :update ]
   before_action :authorize_creator!, only: [ :edit, :update ]
+  before_action :private_event!, only: [ :show, :edit, :update ]
   def index
     @upcoming_events = Event.upcoming
     @past_events = Event.past
@@ -43,7 +44,7 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.expect(event: [ :title, :date, :location ])
+    params.expect(event: [ :title, :date, :location, :visibility ])
   end
 
   def set_event
@@ -52,5 +53,13 @@ class EventsController < ApplicationController
 
   def authorize_creator!
     redirect_to events_path, alert: "Not authorized for that action" unless @event.created_by?(current_user)
+  end
+
+  def private_event!
+    return if @event.public_event?
+    return if @event.created_by?(current_user)
+    return if current_user.attendance_created?(@event)
+
+    redirect_to events_path, alert: "This is a private event"
   end
 end

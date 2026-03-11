@@ -3,6 +3,7 @@ class Event < ApplicationRecord
   has_many :attendances
   has_many :going_attendances, -> { where(attendances: { status: "going" }) }, class_name: "Attendance"
   has_many :attendees, through: :going_attendances, source: :user
+  enum :visibility, { private_event: 0, public_event: 1 }
 
   validates :date, :location, :title, presence: true
 

@@ -15,5 +15,9 @@
     <%= form.label :location %>
     <%= form.text_field :location %>
   </div>
+  <div>
+    <%= form.check_box :visibility, {}, "private_event", "public_event" %>
+    <%= form.label :visibility, "Private event" %>
+  </div>
   <%= form.submit %>
 <% end %>
