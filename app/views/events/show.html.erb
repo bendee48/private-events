@@ -4,7 +4,7 @@
   <%= link_to "Edit", edit_event_path(@event.id), class: "btn" %>
 <% end %>
 
-<%= render partial: "shared/event_card", locals: { event: @event } %>
+<%= render partial: "shared/event_card", locals: { event: @event, show_attendance: true } %>
 
 <% if @event.created_by?(current_user) %>
   <%= tag.h3 "Invite" %>
