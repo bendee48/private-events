@@ -1,22 +1,28 @@
-<h1>User Show Page</h1>
+
 <h3>Created Events</h3>
-<% @user.created_events.each do |e| %>
-  <%= render partial: "shared/event_card", locals: { event: e, show_attendance: false } %>
-<% end %>
-
-<h3>Attending Events</h3>
-
-<h3>Upcoming</h3>
-<% @user.attending_events.each do |e| %>
-  <% if e.date >= Time.now %>
-    <%= render partial: "shared/event_card", locals: { event: e, show_attendance: true } %>
+<%= tag.div(class: 'event-card-container') do %>
+  <% @user.created_events.each do |e| %>
+    <%= render partial: "shared/event_card", locals: { event: e, show_attendance: false } %>
   <% end %>
 <% end %>
 
-<h3>Past</h3>
-<% @user.attending_events.each do |e| %>
-  <% if e.date  < Time.now %>
-    <%= render partial: "shared/event_card", locals: { event: e, show_attendance: false } %>
+<h3>Attending Events</h3>
+<br/>
+<h4>Upcoming</h4>
+<%= tag.div(class: 'event-card-container') do %>
+  <% @user.attending_events.each do |e| %>
+    <% if e.date >= Time.now %>
+      <%= render partial: "shared/event_card", locals: { event: e, show_attendance: true } %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h4>Past</h4>
+<%= tag.div(class: 'event-card-container') do %>
+  <% @user.attending_events.each do |e| %>
+    <% if e.date  < Time.now %>
+      <%= render partial: "shared/event_card", locals: { event: e, show_attendance: false } %>
+    <% end %>
   <% end %>
 <% end %>
 

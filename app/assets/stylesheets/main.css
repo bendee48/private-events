@@ -11,12 +11,34 @@ a {
   color: inherit; /* Inherit text color from parent */
 }
 
+a:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+
 body {
   font-family: sans-serif;
 }
 
-a:hover {
-  text-decoration: underline; /* Add underline on hover */
+html {
+  overflow-y: scroll;
+  scrollbar-width: auto;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 /* Main Styling */
@@ -32,7 +54,13 @@ a:hover {
   padding: .5em 2em;
   border: 1px solid #fff;
   border-radius: 100px;
+  background: #c1c1c1;
   cursor: pointer;
+}
+
+.btn:hover {
+  color: #636363;
+  background: #c1c1c16c;
 }
 
 /* Navbar */
@@ -63,15 +91,14 @@ a:hover {
   border-radius: 5px;
 }
 
-/* Event Index Page */
-
-.card-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1em;
-}
-
 /* Event Card */
+
+.event-card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1em;
+  padding: 2em 0;
+}
 
 .card {
   display: inline-flex;
@@ -80,7 +107,7 @@ a:hover {
   box-shadow: darkgray 3px 3px 10px;
   background-color: #fff;
   border-radius: 1em;
-  padding: 1em;
+  padding: 1.5em 1em;
   gap: 1em;
 }
 
@@ -92,11 +119,130 @@ a:hover {
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 0.2em;
+  gap: 1em;
 }
 
 .visibility-tag {
   background-color: rgba(0, 186, 228, 0.5);
   padding: 0.1em 0.3em;
   border-radius: 5px;
+}
+
+.visibility-tag.private {
+  background-color: rgba(206, 35, 67, 0.5);
+}
+
+.card .going {
+  color: #00a719;
+}
+
+.card .not-going {
+  color: #a62929;
+}
+
+.unattend-btn {
+  background-color: transparent;
+  border-color: #a62929fc;
+  padding: .5em .5em;
+  border-radius: 5px;
+}
+
+.unattend-btn:hover {
+  color: #a62929;
+  border-color: #d00000fc;
+}
+
+/* Invite List */
+.invite-list-container {
+  width: 100%;
+  max-height: 17em;
+  overflow-y: scroll;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+}
+
+.invite-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.invite-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+  border-bottom: 1px solid #eee;
+  gap: 1em;
+}
+
+.invite-list-item:last-child {
+  border-bottom: none;
+}
+
+.invite-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+  flex: 1;
+}
+
+.invite-username {
+  font-weight: 600;
+}
+
+.invite-status {
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* Event Page */
+.main-section-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  gap: 2em;
+  margin: 0 auto;
+}
+
+.event-show-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2em;
+  width: fit-content;
+  margin: 2em auto;
+}
+
+.event-visibility-info {
+  width: 100%;
+  text-align: center;
+  padding: 1em;
+  background: #f5f5f5;
+  border-radius: 4px;
+}
+
+.event-visibility-info p {
+  margin: 0;
+  font-weight: 600;
+}
+
+.event-card-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.event-actions {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  width: 100%;
+}
+
+.event-actions button {
+  min-width: 10em;
 }

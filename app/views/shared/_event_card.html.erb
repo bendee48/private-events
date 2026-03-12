@@ -10,18 +10,22 @@
     <%= tag.p "Hosted by " + event.creator.username %>
   <% end %>
   <%= tag.div class: "card-footer" do %>
-    <%= tag.span event.private_event? ? "Private" : "Public", class: "visibility-tag" %>
+    <%= tag.span event.private_event? ? "Private" : "Public", class: ["visibility-tag", event.private_event? ? "private" : "public"] %>
     <% if current_user %>
       <% if current_user.invited?(event) %>
         <%= link_to user_path(current_user) + "#invites" do %>
           <%= tag.p 'You\'ve been invited.' %>
         <% end %>
       <% elsif current_user.attending?(event) && show_attendance %>
-        <%= button_to "Can't go anymore", event_attendance_path(event, event.attendance_for(current_user)), method: :patch, params: { attendance: { status: 'not going'}} %>
+        <%= button_to "Can't go anymore", 
+            event_attendance_path(event, event.attendance_for(current_user)), 
+            method: :patch, params: { attendance: { status: 'not going'}},
+            class: "btn unattend-btn"
+        %>
       <% elsif current_user.attending?(event) %>
-        <%= tag.p "You're going to this event." %>
+        <%= tag.p "You're going to this event.", class: "going" %>
       <% elsif current_user.declined?(event) %>
-        <%= tag.p "You can't make this event." %>
+        <%= tag.p "You can't make this event.", class: "not-going" %>
       <% end %>
     <% end %>
   <% end %>

@@ -5,7 +5,7 @@
 <% end %>
 <br/>
 <h2 class="events-header">Upcoming Events</h2>
-<%= tag.div(class: "card-container") do %>
+<%= tag.div(class: "event-card-container") do %>
   <% @upcoming_events.each do |event| %>
     <%= render partial: "shared/event_card", locals: { event: event, show_attendance: false } %>
   <% end %>
@@ -13,6 +13,8 @@
 
 
 <h2 class="events-header">Past Events</h2>
-<% @past_events.each do |event| %>
-  <%= render partial: "shared/event_card", locals: { event: event, show_attendance: false } %>
+<%= tag.div(class: "event-card-container") do %>
+  <% @past_events.each do |event| %>
+    <%= render partial: "shared/event_card", locals: { event: event, show_attendance: false } %>
+  <% end %>
 <% end %>

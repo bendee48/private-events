@@ -1,35 +1,54 @@
-<h1>Event Show Page</h1>
+<%= tag.section(class: "main-section-container") do %>
+  <%= tag.div(class: "event-show-container") do %>
+    <% if @event.created_by?(current_user) %>
+      <div class="event-visibility-info">
+        <p>Visibility: <%= @event.visibility.humanize %></p>
+      </div>
+    <% end %>
 
-<% if @event.created_by?(current_user) %>
-  <%= link_to "Edit", edit_event_path(@event.id), class: "btn" %>
-  <p>Visibility: <%= @event.visibility.humanize %></p>
-  <%= button_to(@event.private_event? ? "Make public" : "Make private",
-        event_path(@event),
-        method: :patch,
-        params: { event: { visibility: @event.private_event? ? "public_event" : "private_event" } },
-        class: "btn") %>
-<% end %>
+    <div class="event-card-wrapper">
+      <%= render partial: "shared/event_card", locals: { event: @event, show_attendance: true } %>
+    </div>
 
-<%= render partial: "shared/event_card", locals: { event: @event, show_attendance: true } %>
-
-<% if @event.created_by?(current_user) %>
-  <%= tag.h3 "Invite" %>
-  <% @users.each do |user| %>
-    <%= tag.ul do %>
-      <%= tag.li user.username %>
-      <% if user.invited?(@event) %>
-        <%= tag.li 'Invited' %>
-      <% elsif user.attending?(@event) %>
-        <%= tag.li 'Attending' %>
-      <% elsif user.declined?(@event) %>
-        <%= tag.li 'Declined' %>
-      <% end %>
-      <% if !user.attendance_created?(@event) %>
-        <%= button_to "Invite", event_attendances_path(@event), params: { user_id: user.id } %>
-      <% end %>
+    <% if @event.created_by?(current_user) %>
+      <div class="event-actions">
+        <%= button_to "Edit", edit_event_path(@event.id), method: :get, class: "btn" %>
+        <%= button_to(@event.private_event? ? "Make public" : "Make private",
+              event_path(@event),
+              method: :patch,
+              params: { event: { visibility: @event.private_event? ? "public_event" : "private_event" } },
+              class: "btn") %>
+      </div>
     <% end %>
   <% end %>
+
+  <% if @event.created_by?(current_user) %>
+    <div class="invite-list-container">
+      <ul class="invite-list">
+        <% @users.each do |user| %>
+          <li class="invite-list-item">
+            <div class="invite-user-info">
+              <span class="invite-username"><%= user.username %></span>
+              <span class="invite-status">
+                <% if user.invited?(@event) %>
+                  Invited
+                <% elsif user.attending?(@event) %>
+                  Attending
+                <% elsif user.declined?(@event) %>
+                  Declined
+                <% end %>
+              </span>
+            </div>
+            <% if !user.attendance_created?(@event) %>
+              <%= button_to "Invite", event_attendances_path(@event), params: { user_id: user.id }, class: "btn" %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 <% end %>
+
 
 <%= tag.h3 "Attendees" %>
 <% @attendees.each do |a| %>
