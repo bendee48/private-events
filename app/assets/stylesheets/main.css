@@ -47,6 +47,7 @@ html {
   max-width: 1200px;
   width: 90%;
   margin: 0 auto;
+  padding-bottom: 5em;
 }
 
 .btn {
@@ -111,6 +112,10 @@ html {
   gap: 1em;
 }
 
+.event-show-container .card {
+  min-width: 350px;
+}
+
 .card-body {
   text-align: center;
 }
@@ -148,8 +153,9 @@ html {
 }
 
 .unattend-btn:hover {
-  color: #a62929;
-  border-color: #d00000fc;
+  color: #fff;
+  background-color: #c40000b2;
+  border-color: transparent;
 }
 
 /* Invite List */
@@ -245,4 +251,306 @@ html {
 
 .event-actions button {
   min-width: 10em;
+}
+
+/* Devise Forms */
+.devise-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 200px);
+  padding: 2em;
+}
+
+.devise-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  width: 100%;
+  max-width: 400px;
+  padding: 2em;
+  background-color: #fff;
+  border-radius: 1em;
+  box-shadow: darkgray 3px 3px 10px;
+}
+
+.devise-form h2 {
+  text-align: center;
+  margin-bottom: 0.5em;
+  color: #333;
+}
+
+.devise-form .field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.devise-form .checkbox-field {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75em;
+}
+
+.devise-form label {
+  font-weight: 600;
+  color: #333;
+}
+
+.devise-form input[type="text"],
+.devise-form input[type="email"],
+.devise-form input[type="password"] {
+  padding: 0.75em;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: sans-serif;
+  font-size: 1em;
+}
+
+.devise-form input[type="text"]:focus,
+.devise-form input[type="email"]:focus,
+.devise-form input[type="password"]:focus {
+  outline: none;
+  border-color: #c1c1c1;
+  box-shadow: 0 0 5px rgba(193, 193, 193, 0.5);
+}
+
+.devise-form .actions {
+  margin-top: 1em;
+}
+
+.devise-form input[type="submit"] {
+  width: 100%;
+  padding: 0.75em;
+  border: none;
+  border-radius: 100px;
+  background: #c1c1c1;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.devise-form input[type="submit"]:hover {
+  background: #a9a9a9;
+  color: #fff;
+}
+
+.devise-form em {
+  font-size: 0.85em;
+  color: #666;
+}
+
+.devise-form .devise-links {
+  text-align: center;
+  margin-top: 1em;
+  padding-top: 1em;
+  border-top: 1px solid #eee;
+}
+
+.devise-form .devise-links a {
+  color: #0066cc;
+}
+
+.devise-form .devise-links a:hover {
+  text-decoration: underline;
+}
+
+/* Event Forms */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 200px);
+  padding: 2em;
+}
+
+.event-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  width: 100%;
+  max-width: 500px;
+  padding: 2em;
+  background-color: #fff;
+  border-radius: 1em;
+  box-shadow: darkgray 3px 3px 10px;
+}
+
+.event-form h2 {
+  text-align: center;
+  margin-bottom: 0.5em;
+  color: #333;
+}
+
+.event-form .field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.event-form .checkbox-field {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75em;
+}
+
+.event-form label {
+  font-weight: 600;
+  color: #333;
+}
+
+.event-form input[type="text"],
+.event-form input[type="date"],
+.event-form input[type="email"],
+.event-form input[type="password"],
+.event-form textarea {
+  padding: 0.75em;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: sans-serif;
+  font-size: 1em;
+}
+
+.event-form input[type="text"]:focus,
+.event-form input[type="date"]:focus,
+.event-form input[type="email"]:focus,
+.event-form input[type="password"]:focus,
+.event-form textarea:focus {
+  outline: none;
+  border-color: #c1c1c1;
+  box-shadow: 0 0 5px rgba(193, 193, 193, 0.5);
+}
+
+.event-form .actions {
+  margin-top: 1em;
+}
+
+.event-form input[type="submit"] {
+  width: 100%;
+  padding: 0.75em;
+  border: none;
+  border-radius: 100px;
+  background: #c1c1c1;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.event-form input[type="submit"]:hover {
+  background: #a9a9a9;
+  color: #fff;
+}
+
+/* Flash Messages */
+.notice,
+.alert {
+  padding: 1em 1.5em;
+  margin: 1em 0;
+  border-radius: 5px;
+  font-weight: 500;
+  border-left: 4px solid;
+}
+
+.notice {
+  background-color: rgba(0, 186, 228, 0.15);
+  color: #0066cc;
+  border-color: #00bae4;
+}
+
+.alert {
+  background-color: rgba(206, 35, 67, 0.15);
+  color: #a62929;
+  border-color: #ce2343;
+}
+
+/* Profile Page */
+
+.default-event-text {
+  font-style: italic;
+  color: #636363;
+  margin-left: 1em;
+}
+
+/* Invites Section */
+
+h3#invites {
+  margin-bottom: 1em;
+}
+
+.invites-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  max-width: 600px;
+}
+
+.invite-card {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 0.75em;
+  padding: 1em 1.5em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.invite-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5em;
+}
+
+.invite-info {
+  flex: 1;
+}
+
+.invite-from {
+  color: #666;
+  font-size: 0.9em;
+  margin: 0 0 0.5em 0;
+}
+
+.invite-event-title {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #333;
+  text-decoration: none;
+}
+
+.invite-event-title:hover {
+  color: #0066cc;
+  text-decoration: underline;
+}
+
+.invite-actions {
+  display: flex;
+  gap: 0.75em;
+}
+
+.invite-accept-btn,
+.invite-reject-btn {
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+.invite-accept-btn {
+  background: #00a719;
+  color: #fff;
+}
+
+.invite-accept-btn:hover {
+  background: #008a14;
+}
+
+.invite-reject-btn {
+  background: #a62929;
+  color: #fff;
+}
+
+.invite-reject-btn:hover {
+  background: #8a2020;
 }

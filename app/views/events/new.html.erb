@@ -1,23 +1,29 @@
-<h1>New Event</h1>
+<div class="form-container">
+  <div class="event-form">
+    <h2>New Event</h2>
 
-<%= render "devise/shared/error_messages", resource: @event %>
+    <%= render "devise/shared/error_messages", resource: @event %>
 
-<%= form_with model: @event do |form| %>
-  <div>
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form_with model: @event do |form| %>
+      <div class="field">
+        <%= form.label :title %>
+        <%= form.text_field :title %>
+      </div>
+      <div class="field">
+        <%= form.label :date %>
+        <%= form.date_field :date %>
+      </div>
+      <div class="field">
+        <%= form.label :location %>
+        <%= form.text_field :location %>
+      </div>
+      <div class="field checkbox-field">
+        <%= form.check_box :visibility, {}, "private_event", "public_event" %>
+        <%= form.label :visibility, "Private event" %>
+      </div>
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+    <% end %>
   </div>
-  <div>
-    <%= form.label :date %>
-    <%= form.date_field :date %>
-  </div>
-  <div>
-    <%= form.label :location %>
-    <%= form.text_field :location %>
-  </div>
-  <div>
-    <%= form.check_box :visibility, {}, "private_event", "public_event" %>
-    <%= form.label :visibility, "Private event" %>
-  </div>
-  <%= form.submit %>
-<% end %>
+</div>

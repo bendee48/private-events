@@ -1,8 +1,12 @@
 
 <h3>Created Events</h3>
 <%= tag.div(class: 'event-card-container') do %>
-  <% @user.created_events.each do |e| %>
-    <%= render partial: "shared/event_card", locals: { event: e, show_attendance: false } %>
+  <% if @user.created_events.any? %>
+    <% @user.created_events.each do |e| %>
+      <%= render partial: "shared/event_card", locals: { event: e, show_attendance: false } %>
+    <% end %>
+  <% else %>
+    <%= tag.p "No events created yet.", class: "default-event-text" %>
   <% end %>
 <% end %>
 
@@ -10,27 +14,49 @@
 <br/>
 <h4>Upcoming</h4>
 <%= tag.div(class: 'event-card-container') do %>
-  <% @user.attending_events.each do |e| %>
-    <% if e.date >= Time.now %>
-      <%= render partial: "shared/event_card", locals: { event: e, show_attendance: true } %>
+  <% if @user.attending_events.any? %>
+    <% @user.attending_events.each do |e| %>
+      <% if e.date >= Time.now %>
+        <%= render partial: "shared/event_card", locals: { event: e, show_attendance: true } %>
+      <% end %>
     <% end %>
+  <% else %>
+    <%= tag.p "No upcoming events.", class: "default-event-text" %>
   <% end %>
 <% end %>
 
 <h4>Past</h4>
 <%= tag.div(class: 'event-card-container') do %>
-  <% @user.attending_events.each do |e| %>
-    <% if e.date  < Time.now %>
-      <%= render partial: "shared/event_card", locals: { event: e, show_attendance: false } %>
+  <% if @user.attending_events.any? %>
+    <% @user.attending_events.each do |e| %>
+      <% if e.date  < Time.now %>
+        <%= render partial: "shared/event_card", locals: { event: e, show_attendance: false } %>
+      <% end %>
     <% end %>
-  <% end %>
+  <% else %>
+    <%= tag.p "No past events.", class: "default-event-text" %>
+  <% end%>
 <% end %>
 
 <h3 id="invites">Invites</h3>
-<% @invited_attendances.each do |attendance| %>
-  <% event = attendance.event %>
-  <%= tag.p "New Invite from #{event.creator.username}" %>
-  <%= link_to event.title, event_path(event.id) %>
-  <%= button_to "Accept", event_attendance_path(event, attendance), method: :patch, params: { attendance: { status: "going" } } %>
-  <%= button_to "Reject", event_attendance_path(event, attendance), method: :patch, params: { attendance: { status: "not going"} } %>
+<% if @invited_attendances.any? %>
+  <div class="invites-container">
+    <% @invited_attendances.each do |attendance| %>
+      <% event = attendance.event %>
+      <div class="invite-card">
+        <div class="invite-header">
+          <div class="invite-info">
+            <p class="invite-from">Invite from <strong><%= event.creator.username %></strong></p>
+            <%= link_to event.title, event_path(event.id), class: "invite-event-title" %>
+          </div>
+          <div class="invite-actions">
+            <%= button_to "Accept", event_attendance_path(event, attendance), method: :patch, params: { attendance: { status: "going" } }, class: "invite-accept-btn" %>
+            <%= button_to "Reject", event_attendance_path(event, attendance), method: :patch, params: { attendance: { status: "not going"} }, class: "invite-reject-btn" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <%= tag.p "No invites. Get some friends yo.", class: "default-event-text" %>
 <% end %>
