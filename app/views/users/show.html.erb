@@ -48,6 +48,7 @@
           <div class="invite-info">
             <p class="invite-from">Invite from <strong><%= event.creator.username %></strong></p>
             <%= link_to event.title, event_path(event.id), class: "invite-event-title" %>
+            <p><%= event.formatted_date %></p>
           </div>
           <div class="invite-actions">
             <%= button_to "Accept", event_attendance_path(event, attendance), method: :patch, params: { attendance: { status: "going" } }, class: "invite-accept-btn" %>

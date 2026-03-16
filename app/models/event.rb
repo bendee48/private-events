@@ -7,8 +7,8 @@ class Event < ApplicationRecord
 
   validates :date, :location, :title, presence: true
 
-  scope :upcoming, -> { where("date >= ?", Time.now) }
-  scope :past,     -> { where("date < ?", Time.now) }
+  scope :upcoming, -> { where("date >= ?", Time.now).order(:date) }
+  scope :past,     -> { where("date < ?", Time.now).order(:date) }
 
 
   def created_by?(user)
@@ -18,5 +18,9 @@ class Event < ApplicationRecord
   # Returns the Attendance record associated with this event and a provided user
   def attendance_for(user)
     attendances.find_by(user_id: user.id)
+  end
+
+  def formatted_date
+    date.strftime("%d %B, %Y")
   end
 end

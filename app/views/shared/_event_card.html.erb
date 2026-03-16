@@ -5,7 +5,7 @@
     <% end %>
   <% end %>
   <%= tag.div class: "card-body" do %>
-    <%= tag.p event.date.strftime("%d %B, %Y") %>
+    <%= tag.p event.formatted_date%>
     <%= tag.p event.location %>
     <%= tag.p "Hosted by " + event.creator.username %>
   <% end %>

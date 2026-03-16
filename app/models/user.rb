@@ -4,12 +4,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :created_events, class_name: "Event"
+  has_many :created_events, -> { order(:date) }, class_name: "Event"
   has_many :attendances
   has_many :going_attendances, -> { where(status: "going") }, class_name: "Attendance"
-  has_many :attending_events, through: :going_attendances, source: :event
+  has_many :attending_events, -> { order(:date) }, through: :going_attendances, source: :event
   has_many :invited_attendances, -> { where(status: "invited") }, class_name: "Attendance"
-  has_many :invites, through: :invited_attendances, source: :event
+  has_many :invites, -> { order(:date) }, through: :invited_attendances, source: :event
 
   validates :username, presence: true, uniqueness: true
 
