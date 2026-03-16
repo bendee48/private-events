@@ -3,10 +3,16 @@ class AttendancesController < ApplicationController
   def create
     user = User.find(params[:user_id])
     event = Event.find(params[:event_id])
-    attendance = user.attendances.build(event_id: event.id, status: "invited")
+    status = params[:status]
+    attendance = user.attendances.build(event_id: event.id, status: status)
 
     if attendance.save
-      redirect_back fallback_location: event_path(event), notice: "#{user.username} has been invited."
+      if status == "invited"
+        redirect_back fallback_location: event_path(event), notice: "#{user.username} has been invited."
+      end
+      if status == "going"
+        redirect_back fallback_location: event_path(event), notice: "You are going!"
+      end
     else
       redirect_back fallback_location: event_path(event), alert: attendance.errors.full_messages.to_sentence
     end

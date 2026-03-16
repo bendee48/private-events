@@ -12,6 +12,10 @@
   <%= tag.div class: "card-footer" do %>
     <%= tag.span event.private_event? ? "Private" : "Public", class: ["visibility-tag", event.private_event? ? "private" : "public"] %>
     <% if current_user %>
+      <% if event.public_event? && !event.created_by?(current_user) && !current_user.attendance_created?(event) %>
+        <%= button_to "Attend", event_attendances_path(event), params: { user_id: current_user.id, status: "going" }, class: "btn" %>
+      <% end %>
+
       <% if current_user.invited?(event) %>
         <%= link_to user_path(current_user) + "#invites" do %>
           <%= tag.p 'You\'ve been invited.' %>

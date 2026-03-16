@@ -60,6 +60,6 @@ class EventsController < ApplicationController
     return if @event.created_by?(current_user)
     return if current_user.attendance_created?(@event)
 
-    redirect_to events_path, alert: "This is a private event"
+    redirect_to events_path, alert: "This is a private event. You need to be invited."
   end
 end
