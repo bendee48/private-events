@@ -8,44 +8,113 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-User.destroy_all
-Event.destroy_all
-Attendance.destroy_all
+
+if Rails.env.development?
+  puts "Clearing database..."
+  User.destroy_all
+  Event.destroy_all
+  Attendance.destroy_all
+end
+
+puts "Seeding database..."
 
 # Users
-User.create!(username: "Ben", email: "ben@email.com", password: 'password')
-User.create!(username: "Anna", email: "anna@email.com", password: 'password')
-User.create!(username: "Rob", email: "rob@email.com", password: 'password')
-User.create!(username: "Jess", email: "jess@email.com", password: 'password')
+ben = User.find_or_create_by!(email: "ben@email.com") do |user|
+  user.username = "Ben"
+  user.password = 'password'
+end
+anna = User.find_or_create_by!(email: "anna@email.com") do |user|
+  user.username = "Anna"
+  user.password = 'password'
+end
+rob = User.find_or_create_by!(email: "rob@email.com") do |user|
+  user.username = "Rob"
+  user.password = 'password'
+end
+jess = User.find_or_create_by!(email: "jess@email.com") do |user|
+  user.username = "Jess"
+  user.password = 'password'
+end
 
-# Events
-Event.create!(title: "My Birthday", location: 'My House', date: Time.new(2026, 2, 22), user_id: 1)
-Attendance.create(user_id: 1, event_id: 1, status: "going")
-Event.create!(title: "Cinema", location: 'Doon Toon', date: Time.new(2026, 2, 28), user_id: 1)
-Attendance.create(user_id: 1, event_id: 2, status: "going")
-Event.create!(title: "Gig", location: 'Hackney', date: Time.new(2026, 4, 4), user_id: 2)
-Attendance.create(user_id: 2, event_id: 3, status: "going")
-Event.create!(title: "Climbing", location: 'Dorset', date: Time.new(2026, 8, 7), user_id: 2)
-Attendance.create(user_id: 2, event_id: 4, status: "going")
-Event.create!(title: "Rave", location: 'Manchester', date: Time.new(2026, 5, 1), visibility: 1, user_id: 3)
-Attendance.create(user_id: 3, event_id: 5, status: "going")
-Event.create!(title: "Apple Picking", location: 'Dorset', date: Time.new(2026, 7, 21), visibility: 1, user_id: 3)
-Attendance.create(user_id: 3, event_id: 6, status: "going")
-Event.create!(title: "River Cruise", location: 'Paris', date: Time.new(2027, 4, 7), user_id: 3)
-Attendance.create(user_id: 3, event_id: 7, status: "going")
-Event.create!(title: "Walking Tour", location: 'Argentina', date: Time.new(2028, 12, 6), user_id: 3)
-Attendance.create(user_id: 3, event_id: 8, status: "going")
+# Events (Attendance is also created to add the creator to the list of attendees for the event)
+event1 = Event.find_or_create_by!(title: "My Birthday") do |event|
+  event.location = 'My House'
+  event.date = Time.new(2026, 2, 22)
+  event.creator = ben
+end
+Attendance.find_or_create_by!(user: ben, event: event1) do |att|
+  att.status = "going"
+end
+event2 = Event.find_or_create_by!(title: "Cinema") do |event|
+  event.location = 'Doon Toon'
+  event.date = Time.new(2026, 2, 28)
+  event.creator = ben
+end
+Attendance.find_or_create_by!(user: ben, event: event2) do |att|
+  att.status = "going"
+end
+event3 = Event.find_or_create_by!(title: "Gig") do |event|
+  event.location = 'Hackney'
+  event.date = Time.new(2026, 4, 4)
+  event.creator = anna
+end
+Attendance.find_or_create_by!(user: anna, event: event3) do |att|
+  att.status = "going"
+end
+event4 = Event.find_or_create_by!(title: "Climbing") do |event|
+  event.location = 'Dorset'
+  event.date = Time.new(2026, 8, 7)
+  event.creator = anna
+end
+Attendance.find_or_create_by!(user: anna, event: event4) do |att|
+  att.status = "going"
+end
+event5 = Event.find_or_create_by!(title: "Rave") do |event|
+  event.location = 'Manchester'
+  event.date = Time.new(2026, 5, 1)
+  event.visibility = 1
+  event.creator = rob
+end
+Attendance.find_or_create_by!(user: rob, event: event5) do |att|
+  att.status = "going"
+end
+event6 = Event.find_or_create_by!(title: "Apple Picking") do |event|
+  event.location = 'Somerset'
+  event.date = Time.new(2026, 7, 21)
+  event.visibility = 1
+  event.creator = rob
+end
+Attendance.find_or_create_by!(user: rob, event: event6) do |att|
+  att.status = "going"
+end
+event7 = Event.find_or_create_by!(title: "River Cruise") do |event|
+  event.location = 'Paris'
+  event.date = Time.new(2027, 4, 7)
+  event.creator = rob
+end
+Attendance.find_or_create_by!(user: rob, event: event7) do |att|
+  att.status = "going"
+end
+event8 = Event.find_or_create_by!(title: "Walking Tour") do |event|
+  event.location = 'Argentina'
+  event.date = Time.new(2028, 12, 6)
+  event.creator = rob
+end
+Attendance.find_or_create_by!(user: rob, event: event8) do |att|
+  att.status = "going"
+end
+
 
 # Attendances
-Attendance.create!(user_id: 1, event_id: 3, status: "going")
-Attendance.create!(user_id: 2, event_id: 1, status: "invited")
-Attendance.create!(user_id: 2, event_id: 5, status: "going")
-Attendance.create!(user_id: 3, event_id: 1, status: "invited")
-Attendance.create!(user_id: 1, event_id: 6, status: "invited")
-Attendance.create!(user_id: 2, event_id: 6, status: "invited")
-Attendance.create!(user_id: 3, event_id: 4, status: "not going")
-Attendance.create!(user_id: 4, event_id: 6, status: "invited")
-Attendance.create!(user_id: 4, event_id: 7, status: "invited")
-Attendance.create!(user_id: 4, event_id: 8, status: "invited")
+Attendance.create!(user: ben, event: event3, status: "going")
+Attendance.create!(user: anna, event: event1, status: "invited")
+Attendance.create!(user: anna, event: event5, status: "going")
+Attendance.create!(user: rob, event: event1, status: "invited")
+Attendance.create!(user: ben, event: event6, status: "invited")
+Attendance.create!(user: anna, event: event6, status: "invited")
+Attendance.create!(user: rob, event: event4, status: "not going")
+Attendance.create!(user: jess, event: event6, status: "invited")
+Attendance.create!(user: jess, event: event7, status: "invited")
+Attendance.create!(user: jess, event: event8, status: "invited")
 
 puts "Created 4 users, 8 events and 10 attendances"
