@@ -106,15 +106,15 @@ end
 
 
 # Attendances
-Attendance.create!(user: ben, event: event3, status: "going")
-Attendance.create!(user: anna, event: event1, status: "invited")
-Attendance.create!(user: anna, event: event5, status: "going")
-Attendance.create!(user: rob, event: event1, status: "invited")
-Attendance.create!(user: ben, event: event6, status: "invited")
-Attendance.create!(user: anna, event: event6, status: "invited")
-Attendance.create!(user: rob, event: event4, status: "not going")
-Attendance.create!(user: jess, event: event6, status: "invited")
-Attendance.create!(user: jess, event: event7, status: "invited")
-Attendance.create!(user: jess, event: event8, status: "invited")
+Attendance.find_or_create_by!(user: ben, event: event3, status: "going")
+Attendance.find_or_create_by!(user: anna, event: event1, status: "invited")
+Attendance.find_or_create_by!(user: anna, event: event5, status: "going")
+Attendance.find_or_create_by!(user: rob, event: event1, status: "invited")
+Attendance.find_or_create_by!(user: ben, event: event6, status: "invited")
+Attendance.find_or_create_by!(user: anna, event: event6, status: "invited")
+Attendance.find_or_create_by!(user: rob, event: event4, status: "not going")
+Attendance.find_or_create_by!(user: jess, event: event6, status: "invited")
+Attendance.find_or_create_by!(user: jess, event: event7, status: "invited")
+Attendance.find_or_create_by!(user: jess, event: event8, status: "invited")
 
 puts "Created 4 users, 8 events and 10 attendances"
