@@ -1,24 +1,23 @@
-# README
+# Event App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Rails
 
-Things you may want to cover:
+### Features
+  - Authentication.
+  - Create and edit events.
+  - Set events as public (open to all users) or private (attendance via invite only). 
+  - Send out invitations to other users.
+  - Accept or reject invitations.
+  - Join any public event.
+  - Cancel attendance.
+  - View all events
+  - Use profile page to view created events, attending events and invitations.
 
-* Ruby version
+### Objectives of Project
+  - Personal/ refreshing Rails principles (mainly around associations).
 
-* System dependencies
+### Built with
+  - Rails
+  - HTML
+  - CSS
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
