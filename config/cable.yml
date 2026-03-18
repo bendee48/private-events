@@ -9,7 +9,7 @@ test:
   adapter: test
 
 production:
-  adapter: solid_cable
+  adapter: async # switch to async for small/ practice apps
   connects_to:
     database:
       writing: cable
